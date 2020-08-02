@@ -1,0 +1,18 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+
+
+.select-wrapper {
+    width: 100%;
+    padding: 150px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+.select-wrapper select {
+    width: 100%;
+}
