@@ -48,6 +48,10 @@
       .styled-select__input.styled-select__input-placeholder .styled-select__icon {
         border: solid #cccccc;
         border-width: 0 2px 2px 0; }
+    .styled-select__input .styled-select__current span[data-selected] {
+      display: inline-block;
+      width: 10%;
+      font-size: 10px; }
   .styled-select__dropdown {
     display: none;
     position: absolute;

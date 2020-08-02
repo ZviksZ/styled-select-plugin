@@ -1,8 +1,29 @@
-const select = new StyledSelect('.custom-select', {
+/*const select = new StyledSelect('.custom-select', {
    placeholder: 'Custom-select',
   // defaultValue: 'two'
    //customIcon: '<i class="icon"></i>'
    //customClassName: 'custom'
-})
+   onSelect: function (itemValue, itemText) {
+      console.log(itemValue, itemText)
+   },
+   closeOnSelect: false
+})*/
 
-select.selectItem('two')
+
+document.addEventListener('DOMContentLoaded', function(){
+   document.querySelectorAll('.custom-select').forEach(item => {
+      new StyledSelect(item, {
+         placeholder: 'Custom-select',
+         // defaultValue: 'two'
+         //customIcon: '<i class="icon"></i>'
+         //customClassName: 'custom'
+         onSelect: function (itemValue, itemText) {
+            console.log(itemValue, itemText)
+         },
+         closeOnSelect: false
+      })
+   })
+});
+
+
+//select.selectItem('two')
