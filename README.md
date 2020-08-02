@@ -2,8 +2,12 @@
 
 
 options: {
-  //placeholder: 'Custom-select',
-  // defaultValue: 'two'
+   //placeholder: 'Custom-select',
+   // defaultValue: 'two'
    //customIcon: '<i class="icon"></i>'
    //customClassName: 'custom'
 }
+
+
+
+select.selectItem('two')

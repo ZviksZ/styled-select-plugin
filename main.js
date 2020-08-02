@@ -5,4 +5,4 @@ const select = new StyledSelect('.custom-select', {
    //customClassName: 'custom'
 })
 
-//select.selectItem('two')
+select.selectItem('two')
