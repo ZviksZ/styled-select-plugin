@@ -3,7 +3,7 @@ class StyledSelect {
       this.selector = typeof selector === 'string' ? selector : '.' + selector.classList[0];
       this.options = options;
       this.$el = typeof selector === 'string' ? document.querySelector(selector) : selector;
-
+      this.closeOnSelect = this.options.closeOnSelect || true
 
       if (!this.$el) return;
 
@@ -33,6 +33,8 @@ class StyledSelect {
          this.$styledSelect.classList.add('styled-select--multiple');
 
          this.initMultipleInput()
+      } else {
+         this.initSingleInput()
       }
 
    }
@@ -60,8 +62,18 @@ class StyledSelect {
             this.$inputCurrent.innerHTML = html
          }
       });
+   }
 
+   initSingleInput() {
+      let options = this.getOptions(this.$el)
 
+      options.forEach(option => {
+         if (option.selected) {
+            this.removePlaceholder();
+
+            this.$inputCurrent.innerHTML = '<span data-selected="'+ option.value + '">' + option.text + '</span>'
+         }
+      });
    }
 
    initOptions() {
@@ -115,7 +127,7 @@ class StyledSelect {
          this.options.onSelect(id, selectedItemText)
       }
 
-      if (this.options.closeOnSelect) {
+      if (this.closeOnSelect) {
          this.close()
       }
 
@@ -148,7 +160,7 @@ class StyledSelect {
       }
 
 
-      if (this.options.closeOnSelect) {
+      if (this.closeOnSelect) {
          this.close()
       }
    }
@@ -201,9 +213,9 @@ class StyledSelect {
       let newTemplate = document.createElement("div");
       newTemplate.classList.add('styled-select');
 
-      let idString = this.$el.id ? this.$el.id : Math.floor(Math.random() * 101)
+      let idString = this.$el.id ? this.$el.id : Math.floor(Math.random() * 101) * Math.floor(Math.random() * 101)
 
-      newTemplate.id = 'styled-select-' + idString;
+      newTemplate.id = 's-s-' + idString;
       this.$styledSelectId = newTemplate.id;
 
       newTemplate.innerHTML = `

@@ -48,10 +48,6 @@
       .styled-select__input.styled-select__input-placeholder .styled-select__icon {
         border: solid #cccccc;
         border-width: 0 2px 2px 0; }
-    .styled-select__input .styled-select__current span[data-selected] {
-      display: inline-block;
-      width: 10%;
-      font-size: 10px; }
   .styled-select__dropdown {
     display: none;
     position: absolute;
@@ -89,6 +85,14 @@
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     margin-top: -4px; }
+  .styled-select.styled-select--multiple .styled-select__input .styled-select__current span[data-selected] {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px; }
+  .styled-select.styled-select--multiple .styled-select__input .styled-select__current span + span {
+    margin-left: 4px; }
 
 .initial-select-hide {
   display: none;
