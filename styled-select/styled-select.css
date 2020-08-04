@@ -37,7 +37,7 @@
   .styled-select__input {
     border: 1px solid #ccc;
     border-radius: 5px;
-    height: 46px;
+    min-height: 46px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -91,7 +91,9 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 12px;
-    position: relative; }
+    position: relative;
+    margin-top: 3px;
+    margin-bottom: 3px; }
   .styled-select.styled-select--multiple .styled-select__input .styled-select__current span + span {
     margin-left: 4px; }
   .styled-select.styled-select--multiple .styled-select__input .styled-select__current .styled-select__delete {

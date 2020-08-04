@@ -115,7 +115,7 @@ class StyledSelect {
       let id = e.target.parentElement.dataset.selected;
 
 
-      this.$select.querySelector('option[value="' + id + '"').setAttribute('selected', false);
+      this.$select.querySelector('option[value="' + id + '"').removeAttribute('selected');
       this.$inputCurrent.querySelector(`[data-selected="${id}"]`).remove();
       this.$styledSelect.querySelector(`[data-id="${id}"]`).classList.remove('selected');
 
@@ -128,6 +128,10 @@ class StyledSelect {
          item.removeEventListener('click', deleteFn)
          item.addEventListener('click', deleteFn)
       })
+   }
+
+   showSelectedOptions(options) {
+      return [...options].filter(o => o.selected).map(o => o.value)
    }
 
    selectItem(id) {
@@ -167,8 +171,9 @@ class StyledSelect {
 
       if (selectedItem.classList.contains('selected')) {
          selectedItem.classList.remove('selected')
-         this.$select.querySelector('option[value="' + selectedItemValue + '"').setAttribute('selected', false)
+         this.$select.querySelector('option[value="' + selectedItemValue + '"').removeAttribute('selected')
          this.$inputCurrent.querySelector(`[data-selected="${id}"]`).remove()
+
 
         this.setPlaceholderOnEmpty()
       } else {
@@ -177,6 +182,7 @@ class StyledSelect {
 
          let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ selectedItemValue + '">' + selectedItem.textContent +  '<span class="styled-select__delete"></span></span>'
          this.$inputCurrent.innerHTML = html
+
 
          this.multipleDeleteHandler()
       }
