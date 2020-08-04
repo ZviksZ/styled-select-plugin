@@ -15,6 +15,7 @@ class StyledSelect {
       this.clickHandler = this.clickHandler.bind(this);
       this.getCustomClass = this.getCustomClass.bind(this);
       this.getSelectValues = this.getSelectValues.bind(this);
+      this.deleteMultipleItem = this.deleteMultipleItem.bind(this);
 
 
       this.init()
@@ -41,6 +42,8 @@ class StyledSelect {
 
    initHandlers() {
       this.$styledSelect.addEventListener('click', this.clickHandler);
+
+
    }
 
    initSelectElems() {
@@ -58,10 +61,12 @@ class StyledSelect {
       options.forEach(option => {
          if (option.selected) {
             this.removePlaceholder();
-            let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ option.value + '">' + option.text + '</span>'
+            let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ option.value + '">' + option.text + '<span class="styled-select__delete"></span></span>'
             this.$inputCurrent.innerHTML = html
          }
       });
+
+      this.multipleDeleteHandler()
    }
 
    initSingleInput() {
@@ -104,6 +109,25 @@ class StyledSelect {
       } else {
          this.open()
       }
+   }
+
+   deleteMultipleItem(e) {
+      let id = e.target.parentElement.dataset.selected;
+
+
+      this.$select.querySelector('option[value="' + id + '"').setAttribute('selected', false);
+      this.$inputCurrent.querySelector(`[data-selected="${id}"]`).remove();
+      this.$styledSelect.querySelector(`[data-id="${id}"]`).classList.remove('selected');
+
+      this.setPlaceholderOnEmpty();
+   }
+
+   multipleDeleteHandler() {
+      let deleteFn = this.deleteMultipleItem
+      this.$inputCurrent.querySelectorAll('[data-selected] .styled-select__delete').forEach(function (item) {
+         item.removeEventListener('click', deleteFn)
+         item.addEventListener('click', deleteFn)
+      })
    }
 
    selectItem(id) {
@@ -151,8 +175,10 @@ class StyledSelect {
          selectedItem.classList.add('selected')
          this.$select.querySelector('option[value="' + selectedItemValue + '"').setAttribute('selected', true)
 
-         let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ selectedItemValue + '">' + selectedItem.textContent + '</span>'
+         let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ selectedItemValue + '">' + selectedItem.textContent +  '<span class="styled-select__delete"></span></span>'
          this.$inputCurrent.innerHTML = html
+
+         this.multipleDeleteHandler()
       }
 
       if (this.options.onSelect) {
