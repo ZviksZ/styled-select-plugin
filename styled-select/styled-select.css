@@ -20,7 +20,7 @@
     .styled-select.select-open .styled-select__dropdown::-webkit-scrollbar-thumb {
       width: 5px;
       max-height: 20px;
-      background-color: #d9d9d9;
+      background-color: #bcbcbc;
       border-radius: 3px; }
     @media screen and (min-width: 1000px) {
       .styled-select.select-open .styled-select__dropdown:hover::-webkit-scrollbar {
@@ -53,7 +53,6 @@
     position: absolute;
     border: 1px solid #ccc;
     border-radius: 5px;
-    top: 46px;
     left: 0;
     right: 0;
     max-height: 200px;
