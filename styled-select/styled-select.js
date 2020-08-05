@@ -61,12 +61,10 @@ class StyledSelect {
       options.forEach(option => {
          if (option.selected) {
             this.removePlaceholder();
-            let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ option.value + '">' + option.text + '<span class="styled-select__delete"></span></span>'
+            let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ option.value + '">' + option.text + '<span class="styled-select__delete" data-type="delete"></span></span>'
             this.$inputCurrent.innerHTML = html
          }
       });
-
-      this.multipleDeleteHandler()
    }
 
    initSingleInput() {
@@ -122,15 +120,7 @@ class StyledSelect {
       this.setPlaceholderOnEmpty();
    }
 
-   multipleDeleteHandler() {
-      let deleteFn = this.deleteMultipleItem
-      this.$inputCurrent.querySelectorAll('[data-selected] .styled-select__delete').forEach(function (item) {
-         item.removeEventListener('click', deleteFn)
-         item.addEventListener('click', deleteFn)
-      })
-   }
-
-   showSelectedOptions(options) {
+   getSelectedOptions(options) {
       return [...options].filter(o => o.selected).map(o => o.value)
    }
 
@@ -180,11 +170,11 @@ class StyledSelect {
          selectedItem.classList.add('selected')
          this.$select.querySelector('option[value="' + selectedItemValue + '"').setAttribute('selected', true)
 
-         let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ selectedItemValue + '">' + selectedItem.textContent +  '<span class="styled-select__delete"></span></span>'
+         let html = this.$inputCurrent.innerHTML + '<span data-selected="'+ selectedItemValue + '">' + selectedItem.textContent +  '<span class="styled-select__delete"' +
+            ' data-type="delete"></span></span>'
          this.$inputCurrent.innerHTML = html
 
 
-         this.multipleDeleteHandler()
       }
 
       if (this.options.onSelect) {
@@ -233,6 +223,8 @@ class StyledSelect {
 
       } else if (type === 'backdrop') {
          this.close()
+      } else if (type === 'delete') {
+         this.deleteMultipleItem(event)
       }
    }
 
